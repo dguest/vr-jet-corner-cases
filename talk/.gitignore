@@ -1,0 +1,8 @@
+# ignore a lot of latex stuff
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.toc

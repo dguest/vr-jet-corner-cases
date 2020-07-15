@@ -46,8 +46,8 @@ def draw(odir, name, jet_pt=[400, 40]):
             line(can.ax, pt, f'Jet {num}\n{pt} GeV')
 
 def run():
-    draw('figures', 'radii-vs-pt.pdf', jet_pt=[])
-    draw('figures', 'radii-vs-pt-jets.pdf')
+    draw('genfigs', 'radii-vs-pt.pdf', jet_pt=[])
+    draw('genfigs', 'radii-vs-pt-jets.pdf')
 
 if __name__ == '__main__':
     run()

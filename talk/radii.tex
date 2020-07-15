@@ -1,0 +1,213 @@
+\documentclass[xcolor={table}]{beamer}
+\usepackage[utf8]{inputenc}
+\useoutertheme{infolines}
+\usepackage{transparent}
+
+%%%%% Title and Author %%%%%
+\title[VR-Tagging]{Flavor Tagging VR Jets}
+\subtitle{What could possibly go wrong?}
+\author[dguest@cern.ch]{Dan~Guest}
+\institute[UCI]{UC~Irvine}
+
+\definecolor{UCIBlue}{RGB}{0,100,164}
+\definecolor{UCIYellow}{RGB}{255,210,0}
+\definecolor{UCIYDull}{RGB}{247,235,95}
+\definecolor{UCIBDull}{RGB}{106,162,184}
+\definecolor{UCIBDark}{RGB}{27,61,109}
+\usecolortheme{crane}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=UCIBlue}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=UCIYellow}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=UCIBDark}
+
+\definecolor{dg}{rgb}{0.0,0.5,0.0}
+
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+\usefonttheme{serif} % default family is serif
+\newcommand{\um}{\mu \mathrm{m}}
+\newcommand{\mm}{\mathrm{mm}}
+\newcommand{\cm}{\mathrm{cm}}
+\newcommand{\gev}{\mathrm{GeV}}
+\newcommand{\mev}{\mathrm{MeV}}
+\newcommand{\tev}{\mathrm{TeV}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\pt}{p_{\mathrm{T}}}
+\newcommand{\met}{E_{\mathrm{T}}^{\mathrm{miss}}}
+\newcommand{\supp}[1]{\tilde{#1}}
+\newcommand{\neut}{\supp{\chi}_1^0}
+\newcommand{\cha}{\supp{\chi}_{1}^{\pm}}
+
+\newcommand{\graphic}[2][0.99]{\includegraphics[width=#1\textwidth]{#2}}
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+\newcommand{\link}[2]{\underline{\href{#2}{#1}}}
+\newcommand{\arxiv}[1]{\link{arXiv:#1}{http://arxiv.org/abs/#1}}
+\newcommand{\twocol}[3][0.5]{
+  \newdimen\scwid
+  \scwid=\dimexpr\textwidth-#1\textwidth\relax
+  \begin{columns}
+    \begin{column}{#1\textwidth}#2\end{column}
+      \begin{column}{\scwid}#3\end{column}
+  \end{columns}
+}
+\newcommand{\cent}[1]{\begin{center}#1\end{center}}
+
+% -- set graphics path --
+\graphicspath{{inkfigs/}{rafaelfigs/}{genfigs/}}
+
+% _________________________________________________________________________
+% main document starts here
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction: Many ``R''s}
+  \begin{center}
+  \graphic{radii-vs-pt.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Let's Take Two Jets}
+  \begin{center}
+  \graphic{radii-vs-pt-jets.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Now make them concentric}
+  \twocol{
+    \graphic{arrows.pdf}
+  }{
+    \graphic{radii-vs-pt-jets.pdf}
+    \begin{itemize}
+    \item If $R_{2} > \Delta R (1,2) +  R_{1}$, \colorbox{red}{Jet 1} is enclosed by \colorbox{red!50!}{Jet 2}
+    \item If $R_{1} > \Delta R (1,2)$, the center of \colorbox{red!50!}{Jet 2} is ``in'' \colorbox{red}{Jet 1}
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{How often does this happen?}
+  \framesubtitle{Thanks To Rafael Teixeira De Lima for plots}
+  \twocol{
+    \begin{center}
+      Jet 1 in jet 2 (ok)
+      \graphic{logvr1mvr2_m.pdf}
+    \end{center}
+  }{
+    \begin{center}
+      Jet 2 in jet 1 (bad)
+      \graphic{logvr1_m.pdf}
+    \end{center}
+  }
+  \begin{itemize}
+  \item Enclosed high $\pt$ jet is quite common
+    \begin{itemize}
+    \item This might be ok
+    \end{itemize}
+  \item Enclosed low $\pt$ jet is less so
+    \begin{itemize}
+    \item Good news, because \textbf{this is the case we worry about}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{What could go wrong?}
+  \twocol{
+    \graphic{vr.pdf}
+  }{
+    \begin{itemize}
+    \item \colorbox{red}{Jet 1 forms high $\pt$ core}
+    \item 10\% of the radiation isn't contained
+    \item \colorbox{red!50!}{Jet 2 is forms}
+    \end{itemize}
+  }
+  \begin{itemize}
+  \item From a ``jet'' perspective this is actually quite nice
+  \item Let's try flavor tagging!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Things Get Weird (part 1): Labeling}
+  \twocol{
+    \graphic{labeling.pdf}
+  }{
+    \begin{itemize}
+    \item If the $b$-hadron points right, label
+      \colorbox{blue!25!}{high $\pt$} jet
+    \item If it points left, label \colorbox{blue!10!}{softer one}
+    \item Very ``IRC unsafe''!
+    \item Label is \emph{undefined} if $\Delta R = 0$
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Things Get Weird (part 2): Track Association}
+  \twocol{
+    \graphic{tracking.pdf}
+  }{
+    \begin{itemize}
+    \item Same drill as labeling
+    \item If the track points right, assign to
+      \colorbox{green!25!}{high $\pt$} jet
+    \item If it points left, assign to \colorbox{green!10!}{softer one}
+    \item The upshot: It's consistent with labeling
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{One solution: Ghost Everything}
+  \framesubtitle{Ghost associate $b$-hadrons and tracks}
+  \twocol{
+    \graphic{vr.pdf}
+  }{
+    \begin{itemize}
+    \item No more confusing edge-cases
+    \item Simpler optimization (one parameter)
+    \item It \emph{should} work
+    \item Current association is pre--Run-1
+    \end{itemize}
+  }
+  \begin{itemize}
+  \item The code is (mostly) in place (thanks to Jie Yu, Chris Pollard)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions and Open Questions}
+  \begin{itemize}
+  \item VR jets have some weird edge cases
+    \begin{itemize}
+    \item Especially in boosted flavor tagging
+    \end{itemize}
+  \item We could ``solve'' them by moving away from cone-based labels and association
+  \end{itemize}
+  \begin{block}{Is it worth it?}
+    \begin{itemize}
+    \item \textcolor{dg}{Might prevent surprises later on}
+    \item There were implementation issues before (solved now)
+    \item \textcolor{red}{Seems to be limited to only a few cases (so far)}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% put slides
+
+\end{document}
